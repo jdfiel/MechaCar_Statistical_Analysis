@@ -10,7 +10,7 @@ summary(lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle +
 suspension_coil <- read.csv('Suspension_Coil.csv',stringsAsFactors = F) #read in dataset
 
 # create total_summary for PSI
-total_summary_PSI <- suspension_coil %>% 
+total_summary <- suspension_coil %>% 
   summarize(Mean = mean(PSI), 
             Median = median(PSI), 
             Variance = var(PSI),
@@ -18,9 +18,10 @@ total_summary_PSI <- suspension_coil %>%
             .groups = "keep")
 
 # create total_summary for lot
-total_summary_lot <- suspension_coil %>% 
-  summarize(Mean = mean(Manufacturing_Lot), 
-            Median = median(Manufacturing_Lot), 
-            Variance = var(Manufacturing_Lot),
-            SD = sd(Manufacturing_Lot),
+lot_summary <- suspension_coil %>% 
+  group_by(Manufacturing_Lot) %>% 
+  summarize(Mean = mean(PSI), 
+            Median = median(PSI), 
+            Variance = var(PSI),
+            SD = sd(PSI),
             .groups = "keep")
