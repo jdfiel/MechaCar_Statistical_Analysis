@@ -25,3 +25,12 @@ lot_summary <- suspension_coil %>%
             Variance = var(PSI),
             SD = sd(PSI),
             .groups = "keep")
+
+# Determine if the PSI across all manufacturing lots is stattistically different from the population mean of 1,500 pounds per suqare inch
+t.test(suspension_coil$PSI, mu = 1500)
+
+# per lot
+t.test(subset(suspension_coil, Manufacturing_Lot == "Lot1")$PSI, mu = 1500)
+t.test(subset(suspension_coil, Manufacturing_Lot == "Lot2")$PSI, mu = 1500)
+t.test(subset(suspension_coil, Manufacturing_Lot == "Lot3")$PSI, mu = 1500)
+
